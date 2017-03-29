@@ -1,0 +1,26 @@
+{% macro user_openbsd(user, password) %}
+Add user {{ user }}:
+  module.run:
+    - name: user.add
+    - m_name: {{ user }}
+    - groups:
+      - wheel
+      - wsrc
+    - loginclass: staff
+    - unless: userinfo {{ user }}
+
+{% set pass_bcrypt = salt['cmd.run']('encrypt -b a -c staff %s'|format(password|yaml_squote)) %}
+Set password for {{ user }}:
+  cmd.run:
+    - name: usermod -p {{ pass_bcrypt|yaml_squote }} {{ user }}
+
+/home/{{ user }}/.profile:
+  file.managed:
+    - user: {{ user }}
+    - mode: 600
+    - source: salt://common/files/openbsd/user_profile
+    - replace: True
+    - create: True
+    - require:
+      - user: {{ user }}
+{% endmacro %}

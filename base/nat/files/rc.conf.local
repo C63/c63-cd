@@ -1,0 +1,4 @@
+sndiod_flags=NO
+pkg_scripts="openvpn"
+openvpn_flags="--config /etc/openvpn/server.conf"
+

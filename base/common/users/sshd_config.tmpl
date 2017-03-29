@@ -1,0 +1,33 @@
+# allowed_users is a python list of users that are able to ssh into
+# it will be converted from python list to string with jinja join(' ') filter
+
+{% macro sshd_config(allowed_users) %}
+{% set confmap = salt['grains.filter_by']({
+  'OpenBSD': {
+    'path_source': 'salt://common/files/openbsd/sshd_config',
+    'service': 'sshd',
+  },
+  'Ubuntu': {
+    'path_source': 'salt://common/files/sshd_config',
+    'service': 'ssh',
+  },
+  'default': {
+    'path_source': 'salt://common/files/sshd_config',
+    'service': 'sshd',
+  },
+}, grain='os') %}
+
+Ensure sshd_config in correct state:
+  module.run:
+    - name: cp.get_template
+    - path: {{ confmap.path_source }}
+    - dest: /etc/ssh/sshd_config
+    - kwargs:
+        allowed_users: {{ allowed_users|join(' ') }}
+
+{{ confmap.service }}:
+  service.running:
+    - enable: True
+    - watch:
+      - module: Ensure sshd_config in correct state
+{% endmacro %}

@@ -1,0 +1,2 @@
+# allow wheel group but with password
+%wheel      ALL=(ALL) ALL

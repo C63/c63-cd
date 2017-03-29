@@ -1,0 +1,28 @@
+# Setup $USER/.ssh/authorized_keys for user
+# Make sure you have set 2 jinja variables:
+# - user: user name
+# - ssh_pub_key: public ssh key
+
+Ensure {{ user }} present:
+  user.present:
+    - name: {{ user }}
+    - remove_groups: False
+
+/home/{{ user }}/.ssh:
+  file.directory:
+    - user: {{ user }}
+    - group: {{ user }}
+    - mode: 700
+    - makedirs: True
+    - require:
+      - user: Ensure {{ user }} present
+
+/home/{{ user }}/.ssh/authorized_keys:
+  file.managed:
+    - contents: {{ ssh_pub_key }}
+    - user: {{ user }}
+    - group: {{ user }}
+    - mode: 600
+    - require:
+      - file: /home/{{ user }}/.ssh
+

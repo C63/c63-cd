@@ -1,0 +1,99 @@
+##### Primary configuration settings #####
+##########################################
+# The address of the interface to bind to (defaut to 0.0.0.0 meaning all interfaces):
+interface: 10.10.1.5
+
+# Set the number of hours to keep old job information in the job cache:
+keep_jobs: 1
+
+# Set the default timeout for the salt command and api. The default is 5
+# seconds.
+timeout: 5
+
+#####  Large-scale tuning settings   #####
+##########################################
+# The number of worker threads to start. These threads are used to manage
+# return calls made from minions to the master. If the master seems to be
+# running slowly, increase the number of threads. This setting can not be
+# set lower than 3.
+worker_threads: 3
+
+#####        Security settings       #####
+##########################################
+
+#####     Salt-SSH Configuration     #####
+##########################################
+
+#####      State System settings     #####
+##########################################
+# The file server works on environments passed to the master, each environment
+# can have multiple root directories, the subdirectories in the multiple file
+# roots cannot match, otherwise the downloaded files will not be able to be
+# reliably ensured. A base environment is required to house the top file.
+# Example:
+# file_roots:
+#   base:
+#     - /srv/salt/
+#   dev:
+#     - /srv/salt/dev/services
+#     - /srv/salt/dev/states
+#   prod:
+#     - /srv/salt/prod/services
+#     - /srv/salt/prod/states
+#
+file_roots:
+  base:
+    - /var/salt/base
+
+# A regular expression (or a list of expressions) that will be matched
+# against the file path before syncing the modules and states to the minions.
+# This includes files affected by the file.recurse state.
+# For example, if you manage your custom modules and states in subversion
+# and don't want all the '.svn' folders and content synced to your minions,
+# you could set this to '/\.svn($|/)'. By default nothing is ignored.
+file_ignore_regex:
+ - '/\.svn($|/)'
+ - '/\.git($|/)'
+
+#####         Pillar settings        #####
+##########################################
+# Salt Pillars allow for the building of global data that can be made selectively
+# available to different minions based on minion grain filtering. The Salt
+# Pillar is laid out in the same fashion as the file server, with environments,
+# a top file and sls files. However, pillar data does not need to be in the
+# highstate format, and is generally just key/value pairs.
+pillar_roots:
+  base:
+    - /var/salt/pillar
+
+#####          Syndic settings       #####
+##########################################
+
+#####      Peer Publish settings     #####
+##########################################
+
+#####         Mine settings     #####
+#####################################
+
+#####         Logging settings       #####
+##########################################
+
+#####         Node Groups           ######
+##########################################
+
+#####     Range Cluster settings     #####
+##########################################
+
+#####      Returner settings          ######
+############################################
+
+######    Miscellaneous  settings     ######
+############################################
+
+#####        Reactor settings       #####
+#########################################
+reactor:
+  - 'salt/gm/*':
+    - salt://gm/reactor.sls
+
+

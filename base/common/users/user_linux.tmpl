@@ -1,0 +1,16 @@
+{% macro user_linux(user, password) %}
+{{ user }}:
+  user.present:
+    - remove_groups: False
+    - gid_from_name: True
+    - groups:
+      - wheel
+
+{% set pass_sha512 = salt['shadow.gen_password']('%s'|format(password)) %}
+Set password for {{ user }}:
+  module.run:
+    - name: shadow.set_password
+    - m_name: {{ user }}
+    - password: {{ pass_sha512|yaml_squote }}
+{% endmacro %}
+

@@ -1,0 +1,18 @@
+{% macro salt_pkgs(pkgs) %}
+Install salt package:
+  pkg.installed:
+    - names: {{ pkgs }}
+{% endmacro %}
+
+
+{% macro salt_files(instance_name, salt_files) %}
+{% for f in salt_files %}
+/etc/salt/{{ f }}:
+  file.managed:
+    - user: root
+    - mode: 400
+    - source: salt://{{ instance_name }}/files/{{ f }}
+    - replace: True
+    - create: True
+{% endfor %}
+{% endmacro %}

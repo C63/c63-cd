@@ -1,0 +1,43 @@
+{% macro hashicorp_install(package, version, zip_url, zip_sha256_hash) %}
+
+unzip:
+  pkg.installed
+
+{% set bin_ver = "%s-%s"|format(package, version) %}
+{% set zip_file = "%s.zip"|format(bin_ver) %}
+
+Download {{ package }}:
+  file.managed:
+    - name: /tmp/{{ zip_file }}
+    - source: {{ zip_url }}
+    - source_hash: sha256={{ zip_sha256_hash }}
+    - unless: test -f /usr/local/bin/{{ bin_ver }}
+
+Extract {{ package }}:
+  cmd.wait:
+    - name: unzip -o -d /tmp /tmp/{{ zip_file }}
+    - watch:
+      - file: Download {{ package }}
+
+Install {{ package }}:
+  file.rename:
+    - name: /usr/local/bin/{{ bin_ver }}
+    - source: /tmp/{{ package }}
+    - watch:
+      - cmd: Extract {{ package }}
+
+Clean {{ package }}:
+  file.absent:
+    - name: /tmp/{{ zip_file }}
+    - watch:
+      - file: Install {{ package }}
+
+Link {{ package }}:
+  file.symlink:
+    - name: /usr/local/bin/{{ package }}
+    - target: /usr/local/bin/{{ bin_ver }}
+    - watch:
+      - file: Install {{ package }}
+
+{% endmacro %}
+

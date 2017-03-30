@@ -2,6 +2,7 @@ include:
   - .gpg
   - .boto
   - .ca
+  - .gocd
 
 {% from 'lib/salt.tmpl' import salt_files, salt_pkgs with context %}
 {{ salt_pkgs(['salt-minion', 'salt-master', 'salt-cloud', 'salt-ssh']) }}

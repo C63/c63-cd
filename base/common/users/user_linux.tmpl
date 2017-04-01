@@ -2,6 +2,7 @@
 {{ user }}:
   user.present:
     - remove_groups: False
+    - shell: /bin/bash
     - gid_from_name: True
     - groups:
       - wheel

@@ -7,6 +7,8 @@ vpc:
   name: {{ vpc_name }}
   region: eu-central-1
   cidr_internal: {{ cidr_internal }}
+  cloud_key: c63-cloud-bootstrap
+  cloud_key_location: /etc/salt/pki/c63-cloud-bootstrap.pem
   secgroup:
     - name: {{ vpc_name }}-nat-egress
       description: Outgoing traffic from vpc

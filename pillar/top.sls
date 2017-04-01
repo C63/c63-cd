@@ -1,3 +1,5 @@
 base:
   '*':
     - common
+  'gm':
+    - secgroup

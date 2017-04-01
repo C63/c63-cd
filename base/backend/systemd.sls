@@ -9,8 +9,5 @@ run modus at boot:
     - watch:
       - file: /etc/systemd/system/modus.service
 
-restart modus:
-  cmd.run:
-    - name: systemctl restart modus
-    - watch:
-      - file: /etc/systemd/system/modus.service
+modus:
+  service.running

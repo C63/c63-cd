@@ -1,7 +1,7 @@
 #!yaml|gpg
 
 postgres:
-  url: jdbc:postgres://rds.c8epalgxmd5k.eu-central-1.rds.amazonaws.com:5432/modus
+  url: jdbc:postgresql://rds.c8epalgxmd5k.eu-central-1.rds.amazonaws.com:5432/modus
   user: rds
   pass: |
     -----BEGIN PGP MESSAGE-----

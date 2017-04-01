@@ -1,7 +1,9 @@
 {% set cidr_internal = '10.10.0.0/16'%}
 {% set vpc_name = 'c63' %}
+{% set vpc_id = 'vpc-91bc01f9' %}
 
 vpc:
+  id: {{ vpc_id }}
   name: {{ vpc_name }}
   region: eu-central-1
   cidr_internal: {{ cidr_internal }}

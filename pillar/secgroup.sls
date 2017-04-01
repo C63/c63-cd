@@ -48,7 +48,7 @@ vpc:
         - ip_protocol: udp
           from_port: 1194
           to_port: 1194
-          cidr_ip: {{ cidr_internal }}
+          cidr_ip: '0.0.0.0/0'
     - name: {{ vpc_name }}-rds
       description: rds connection
       rule:

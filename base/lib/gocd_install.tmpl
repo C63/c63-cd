@@ -1,0 +1,23 @@
+{# pkg is either 'server' or 'agent' #}
+
+{% macro gocd_install(pkg) %}
+openjdk-8-jdk-headless:
+  pkg.installed
+
+openjdk-8-jdk:
+  pkg.installed
+
+gocd:
+  pkgrepo.managed:
+    - name: deb https://download.gocd.io /
+    - file: /etc/apt/sources.list.d/gocd.list
+    - key_url: https://download.gocd.io/GOCD-GPG-KEY.asc
+
+go-{{ pkg }}:
+  pkg.installed: []
+  service.running:
+    - enable: True
+    - require:
+      - pkg: go-{{ pkg }}
+{% endmacro %}
+

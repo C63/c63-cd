@@ -1,0 +1,26 @@
+{% macro nginx(config_file) %}
+
+nginx:
+  pkg.installed
+
+/etc/nginx/sites-enabled/default:
+  file.absent
+
+/etc/nginx/sites-available/{{ config_file }}:
+  file.managed:
+    - source: salt://{{ slspath }}/files/{{ config_file }}
+
+/etc/nginx/sites-enabled/{{ config_file }}:
+  file.symlink:
+    - target: /etc/nginx/sites-available/{{ config_file }}
+
+Ensure nginx running:
+  service.running:
+    - name: nginx
+    - enable: True
+    - reload: True
+    - watch:
+      - file: /etc/nginx/sites-available/{{ config_file }}
+
+{% endmacro %}
+

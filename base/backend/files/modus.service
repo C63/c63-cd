@@ -6,7 +6,7 @@
 Description=Modus backend api
 
 [Service]
-Environment=DATABASE_URL=jdbc:postgres://{{ url }}
+Environment=DATABASE_URL={{ url }}
 Environment=USER={{ user }}
 Environment=PASSWORD={{ password }}
 User=tto

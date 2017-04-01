@@ -1,11 +1,14 @@
 {# pkg is either 'server' or 'agent' #}
 
 {% macro gocd_install(pkg) %}
-openjdk-8-jdk-headless:
-  pkg.installed
 
-openjdk-8-jdk:
+java install jdk:
+  pkg.installed:
+    - name: openjdk-8-jdk-headless
+
+java install jdk headless:
   pkg.installed
+    - name: openjdk-8-jdk
 
 gocd:
   pkgrepo.managed:

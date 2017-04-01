@@ -12,6 +12,7 @@ Environment=USER={{ user }}
 Environment=PASSWORD={{ password }}
 User=tto
 ExecStart=java -jar /home/tto/modus-api/target/modus-api-0.1.0-SNAPSHOT-standalone.jar
+ExecStop=killall -9 java
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=modus-api

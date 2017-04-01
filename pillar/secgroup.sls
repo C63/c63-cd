@@ -40,7 +40,7 @@ vpc:
           from_port: -1
           to_port: -1
           cidr_ip: {{ cidr_internal }}
-    - name: {{ vpc_name }}}}-vpn
+    - name: {{ vpc_name }}-vpn
       description: vpn connection
       rule:
         - ip_protocol: udp

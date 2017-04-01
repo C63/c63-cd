@@ -1,0 +1,20 @@
+
+{% set url = salt['pillar.get']('postgres:url') %}
+{% set user = salt['pillar.get']('postgres:user') %}
+{% set password = salt['pillar.get']('postgres:pass') %}
+
+[Unit]
+Description=Modus backend api
+
+[Service]
+Environment=DATABASE_URL=jdbc:postgres://{{ url }}
+Environment=USER={{ user }}
+Environment=PASSWORD={{ password }}
+User=tto
+ExecStart=java -jar /home/tto/modus-api/target/modus-api-0.1.0-SNAPSHOT-standalone.jar
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=modus-api
+
+[Install]
+WantedBy=network.target

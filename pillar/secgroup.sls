@@ -58,4 +58,11 @@ vpc:
           from_port: 5432
           to_port: 5432
           cidr_ip: {{ cidr_internal }}
+    - name: {{ vpc_name }}-backend
+      description: backend connection
+      rule:
+        - ip_protocol: tcp
+          from_port: 3000
+          to_port: 3000
+          cidr_ip: {{ cidr_internal }}
 

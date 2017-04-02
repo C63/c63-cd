@@ -3,6 +3,23 @@
 postgres:
   url: jdbc:postgresql://rds.c8epalgxmd5k.eu-central-1.rds.amazonaws.com:5432/modus
   user: rds
+  secret: |
+    -----BEGIN PGP MESSAGE-----
+    hQIMA8banEHIiRfLAQ/8CTE4dGx77qRiIc8ejzv1awkCUeFs59BjJM4xGiTNEpTA
+    p/U/8bAT1JND25kGmZfKam8rH8owVQ/tvWG9dgN/YLUxPv662BbNaH6chahsU14t
+    mazZYLGObbPd9/pxmaD5DJ0mCAK98ePhU7vIrZAzquhlrYKGCJJqJkIS3a/ggpoZ
+    Tj7OLg+l2HQaWH+zPYcizvPbdYg48ZSIfvHW79Hc1t9UKvWhJUDzAHF+1PtqdgKk
+    /guCkM9RtbhgYfrhIqrIZ2E7AujUtUvR1gpYrmWkQUkbO2R3Hm4A4vsK8ItjPeTF
+    GpFLRIWO3kAlegWoJ5eHCoR4a8I9upxolzou+Q9bkb3CTA5/75SiHdO4JJatADDy
+    bIyJaraEx0lwpI7kFx/OX+udXqFJAba5lTkTXOGC5clV8bfCIhKY/wG229qpBwDr
+    Xt6iFUFF9bLolZN0AweVxet7HCdXpcRwZKASL0Iq1BlRxO61agt6k+xFxwpxdY7x
+    L0oED45IvlXPjA/UXf2O5fr6R0gyTCLDD4GFZZuB9+f7OzxEL1qz0ORm+0KEOkv4
+    twx0iScvxCV/cNVykSWj84z9LJf377ZtDRcKdiSgXitZvpZLxpekmOqnWXv1EafB
+    2ZjSCTGkctRmPyivpTFXj+kiBpNjsQS3bfFA5cwwx6Srx0Vm3HR7JS5hZfMYmTTS
+    XwGGt+TuxXj3C52xd2rLXUX/P9WglGfROG4I0mzN8rGuwB9G85H6Rr2+uHBnyjAu
+    x4E8dK8aFOUDs+APfGtlwO/fZ01adUI9X0hF+y7PYIUvN0lHJ8k6foEmu+Kc1lQX
+    =gZiz
+    -----END PGP MESSAGE-----
   pass: |
     -----BEGIN PGP MESSAGE-----
     hQIMA8banEHIiRfLARAAjjiCHWm501L4LScZA3OvGvMWqMSNYx9QmrkBsk3ATmco

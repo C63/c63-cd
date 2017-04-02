@@ -1,6 +1,7 @@
 {%- set url = salt['pillar.get']('postgres:url') -%}
 {%- set user = salt['pillar.get']('postgres:user') -%}
 {%- set password = salt['pillar.get']('postgres:pass') -%}
+{%- set secret = salt['pillar.get']('postgres:secret') -%}
 
 [Unit]
 Description=Modus backend api
@@ -9,8 +10,9 @@ Description=Modus backend api
 Environment=DATABASE_URL={{ url }}
 Environment=USER={{ user }}
 Environment=PASSWORD={{ password }}
-User=tto
-ExecStart=/usr/bin/java -jar /home/tto/modus-api/target/modus-api-0.1.0-SNAPSHOT-standalone.jar
+Environment=SECRET={{ secret }}
+User=go
+ExecStart=/usr/bin/java -jar /var/go/released/modus-api-0.1.0-SNAPSHOT-standalone.jar
 ExecStop=killall -9 java
 StandardOutput=syslog
 StandardError=syslog

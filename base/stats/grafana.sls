@@ -1,4 +1,4 @@
-{% if grains['os'] == 'Debian' %}
+{% if grains['os'] in ['Debian', 'Ubuntu'] %}
 
 grafana-repo:
   pkgrepo.managed:

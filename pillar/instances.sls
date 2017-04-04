@@ -20,3 +20,11 @@ vpc:
         - c63-nat-egress
         - c63-default-internal
         - c63-rds
+    - name: c63-stats
+      image_id: {{ ami_id }}
+      private_ip_address: 10.10.1.30
+      size: t2.micro
+      subnet: subnet-78dfa210
+      secgroup:
+        - c63-nat-egress
+        - c63-default-internal
